@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const BASE = 'https://windborne-proxy.vercel.app/api/treasure';
+const BASE = 'https://windborne-jet.vercel.app/api/treasure';
 
 // dev purposes -- avoid CORS error
 // const BASE = 'http://localhost:3001/api/treasure/';
