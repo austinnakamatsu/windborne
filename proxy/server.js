@@ -9,6 +9,10 @@ const cache = new NodeCache({ stdTTL: 600 }); // cache for 10 minutes
 
 app.use(cors()); // allow all origins
 
+app.get('/', (req, res) => {
+  res.send('Windborne Proxy is running. Use /api/treasure/:file to fetch JSON.');
+});
+
 // Dynamic proxy endpoint
 app.get('/api/treasure/:file', async (req, res) => {
   const file = req.params.file; // e.g., "00.json"
