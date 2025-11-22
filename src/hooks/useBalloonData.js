@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
-// const BASE = 'https://a.windbornesystems.com/treasure/';
+const BASE = 'https://a.windbornesystems.com/treasure/';
 
 // dev purposes -- avoid CORS error
-const BASE = 'http://localhost:3001/api/treasure/';
+// const BASE = 'http://localhost:3001/api/treasure/';
 
 const HOURS = [...Array(24).keys()].map(n => String(n).padStart(2, '0') + '.json');
 
