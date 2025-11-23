@@ -260,12 +260,6 @@ export default function MapView({ histories, showPaths = true, showBalloons = tr
 
     return (
     <div style={{ width: "100%", height: "100%", position: "relative" }}>
-        <div style={{
-        position: "absolute", top: 12, left: 12, zIndex: 10,
-        background: "rgba(255,255,255,0.9)", padding: 8, borderRadius: 6, boxShadow: "0 1px 4px rgba(0,0,0,0.2)"
-        }}>
-        </div>
-
         <Map
         ref={mapRef}
         mapboxAccessToken={MAPBOX_TOKEN}

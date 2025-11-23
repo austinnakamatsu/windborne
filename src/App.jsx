@@ -56,6 +56,7 @@ export default function App() {
         <p>
           External dataset: <b>Open-Meteo</b> (free hourly global forecast) — provides windspeed/direction for comparison with in-situ balloon data.
         </p>
+        <p>© 2025 Austin Nakamatsu. All rights reserved.</p>
       </footer>
     </div>
   );

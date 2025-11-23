@@ -49,9 +49,19 @@ button:hover {
 
 footer {
   background: transparent;
-  padding: 1.5em 2em;
   font-size: 0.9em;
   color: rgba(245, 246, 251, 0.65);
+
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  text-align: center;
+}
+
+footer p {
+  margin: 0.25rem;   
+  padding-bottom: 0.75rem;              /* remove default margins */
 }
 
 html, body, #root {
