@@ -20,7 +20,6 @@ function tileCenter(tile) {
 }
 
 // Create arrow
-// need to work on css
 function makeArrowShaft(centerLat, centerLon, directionDeg, lengthDeg) {
     const rad = (directionDeg % 360) * Math.PI / 180;
     const dLat = Math.cos(rad) * lengthDeg;
@@ -31,6 +30,7 @@ function makeArrowShaft(centerLat, centerLon, directionDeg, lengthDeg) {
     ];
 }
 
+// point arrow tip in right direction
 function makeArrowHead(tipLon, tipLat, directionDeg, headLenDeg = 0.05, headAngleDeg = 25) {
     const rad = (directionDeg % 360) * Math.PI / 180;
     const angleA = rad + (headAngleDeg * Math.PI / 180);
@@ -68,7 +68,7 @@ function normalizeAcrossAntimeridian(points) {
         if (delta < -180) curr.lon += 360;
         adjusted.push(curr);
     }
-  return adjusted;
+    return adjusted;
 }
 
 export default function MapView({ histories, showPaths = true, showBalloons = true, showWind = true}) {
@@ -77,7 +77,7 @@ export default function MapView({ histories, showPaths = true, showBalloons = tr
     const { windData } = useWindData();
     const [zoom, setZoom] = useState(3);
 
-
+    // scale arrows according to zoom factor
     function handleMove(e) {
         setZoom(e.viewState.zoom);
     }
@@ -121,10 +121,10 @@ export default function MapView({ histories, showPaths = true, showBalloons = tr
     // Need to work on css here
     useEffect(() => {
     if (!mapRef.current) return;
-    const map = mapRef.current.getMap();
-    const handleZoom = () => setZoom(map.getZoom());
-    map.on("zoom", handleZoom);
-    return () => map.off("zoom", handleZoom);
+        const map = mapRef.current.getMap();
+        const handleZoom = () => setZoom(map.getZoom());
+        map.on("zoom", handleZoom);
+        return () => map.off("zoom", handleZoom);
     }, [mapRef]);
 
     const { arrowsShafts, arrowsHeads } = useMemo(() => {
@@ -169,7 +169,7 @@ export default function MapView({ histories, showPaths = true, showBalloons = tr
         arrowsShafts: { type: "FeatureCollection", features: shafts },
         arrowsHeads: { type: "FeatureCollection", features: heads }
     };
-    }, [windData, zoom]); // 👈 zoom is safe — no refs involved
+    }, [windData, zoom]);
 
     useEffect(() => {
     let raf = null;
@@ -256,7 +256,8 @@ export default function MapView({ histories, showPaths = true, showBalloons = tr
     };
     }, [windData]);
 
-    if (!MAPBOX_TOKEN) return <div><h3>Missing Mapbox token</h3></div>;
+    // for dev purposes
+    // if (!MAPBOX_TOKEN) return <div><h3>Missing Mapbox token</h3></div>;
 
     return (
     <div style={{ width: "100%", height: "100%", position: "relative" }}>
@@ -318,11 +319,19 @@ export default function MapView({ histories, showPaths = true, showBalloons = tr
         </Source>} 
 
         {selected && <Popup longitude={selected.lon} latitude={selected.lat} anchor="bottom" onClose={() => setSelected(null)} closeOnClick={false}>
-            <div>
+            <div style={{
+                padding: '8px 12px',
+                background: '#333',
+                borderRadius: '6px',
+                border: '1px solid #ccc',
+                fontSize: '14px',
+                color: 'rgba(255, 255, 255, 0.9)',
+                textAlign: 'center',
+            }}>
             <strong>{selected.id}</strong><br />
             Lat: {selected.lat.toFixed(2)}°<br />
             Lon: {selected.lon.toFixed(2)}°<br />
-            {selected.alt != null && <>Value: {selected.alt.toFixed(2)}</>}
+            {selected.alt != null && <>AGL: {selected.alt.toFixed(2)} km</>}
             </div>
         </Popup>}
         </Map>

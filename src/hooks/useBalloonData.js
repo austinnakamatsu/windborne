@@ -65,6 +65,10 @@ export default function useBalloonData() {
   // Load data on mount
   useEffect(() => {
     reload();
+
+    // auto refresh data every hour
+    const interval = setInterval(reload, 60 * 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
 
   return { data, reload, loading, error };

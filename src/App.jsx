@@ -4,13 +4,11 @@ import useBalloonData from './hooks/useBalloonData';
 import useWindData from './hooks/useWindData';
 
 export default function App() {
-  const { data, reload, loading, error } = useBalloonData();
+  const { data, loading, error } = useBalloonData();
   const wind = useWindData();
   const [showPaths, setShowPaths] = useState(true);
   const [showBalloons, setShowBalloons] = useState(true);
   const [showWind, setShowWind] = useState(true);
-
-
 
   return (
     <div className="app">
@@ -18,7 +16,6 @@ export default function App() {
         <h1>WindBorne Constellation — Live 24H Explorer</h1>
         <p>Combines live WindBorne balloon data with live wind data from Open-Meteo.</p>
         <div className="controls">
-          <button onClick={reload}>Reload Data</button>
           <label>
             <input
               type="checkbox"
