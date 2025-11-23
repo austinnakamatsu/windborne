@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import MapView from './components/MapView';
 import useBalloonData from './hooks/useBalloonData';
 import useWindData from './hooks/useWindData';
@@ -39,7 +39,6 @@ export default function App() {
           </span>
         </div>
       </header>
-
 
       <main>
         <div style={{ display: 'flex', flexDirection: 'column', height: '70vh', width: '100%' }}>

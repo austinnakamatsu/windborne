@@ -51,8 +51,6 @@ export default function useBalloonData() {
 
       });
       
-
-
       setData(merged);
     } catch (err) {
       console.error(err);

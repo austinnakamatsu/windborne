@@ -209,7 +209,6 @@ export default function MapView({ histories, showPaths = true, showBalloons = tr
 
         for (const a of animatedArrows) {
             // move along vector proportional to speed
-            // scale factor converts m/s to degrees/frame (adjust for visual speed)
             const speedFactor = 0.0005; // tweak this for faster/slower motion
             a.progress += (a.speed * speedFactor);
 
