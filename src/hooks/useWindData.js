@@ -5,9 +5,8 @@ const TILE_SIZE = 10; // 10x10° pseudo-tile
 const FIXED_BATCH_SIZE = 24;
 const NUM_BATCHES = 27;
 const FIRST_DELAY = 60 * 1000; // 1 min
-const REFRESH_INTERVAL = 60 * 60 * 1000; // 1 hour in ms
+const REFRESH_INTERVAL = 2 * 60 * 60 * 1000; // 2 hours in ms
 const limit = pLimit(10); // max 10 requests at a time
-
 
 // Convert tile center into a bounding box
 function makeTileBounds(lat, lon) {
@@ -163,10 +162,17 @@ export default function useWindData() {
                 batchCountRef.current = 0;
 
             setTimeout(fetchBatch, delay);
-            }
+        }
+        else {
+            // Auto-refresh every 2 hours
+            setTimeout(() => {
+                fetchedTilesRef.current.clear();
+                batchCountRef.current = 0; 
+                fetchBatch();
+            }, REFRESH_INTERVAL);
         }
     }
-
+}
     fetchBatch();
 
     return () => { mounted = false; };

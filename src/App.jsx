@@ -32,7 +32,7 @@ export default function App() {
           </label>
           <label>
             <input type="checkbox" checked={showWind} onChange={e => setShowWind(e.target.checked)} />
-            Show wind arrows
+            Show wind
         </label>
           <span className="status">
             {loading ? 'Loading...' : error ? 'Error fetching data' : `Loaded ${Object.keys(data).length} balloons`}
