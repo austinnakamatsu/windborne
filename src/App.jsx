@@ -5,7 +5,7 @@ import useWindData from './hooks/useWindData';
 
 export default function App() {
   const { data, loading, error } = useBalloonData();
-  const wind = useWindData();
+  const { windData, windloading, winderror} = useWindData();
   const [showPaths, setShowPaths] = useState(true);
   const [showBalloons, setShowBalloons] = useState(true);
   const [showWind, setShowWind] = useState(true);
@@ -37,13 +37,16 @@ export default function App() {
           <span className="status">
             {loading ? 'Loading...' : error ? 'Error fetching data' : `Loaded ${Object.keys(data).length} balloons`}
           </span>
+          <span className="status">
+            {windloading ? 'Loading...' : winderror ? 'Error fetching data' : `Loaded ${windData.length}/648 wind tiles`}
+          </span>
         </div>
       </header>
 
       <main>
         <div style={{ display: 'flex', flexDirection: 'column', height: '70vh', width: '100%' }}>
             <div style={{ flex: 1, width: '100%', height: '70vh' }}>
-              <MapView histories={data} wind={wind} showPaths={showPaths} showBalloons={showBalloons} />
+              <MapView histories={data} wind={windData} showPaths={showPaths} showBalloons={showBalloons} />
             </div>
         </div>
       </main>

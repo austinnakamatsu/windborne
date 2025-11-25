@@ -167,7 +167,9 @@ export default function useWindData() {
             // Auto-refresh every 2 hours
             setTimeout(() => {
                 fetchedTilesRef.current.clear();
-                batchCountRef.current = 0; 
+                batchCountRef.current = 0;
+                
+                setWindData([]); // clear existing data
                 fetchBatch();
             }, REFRESH_INTERVAL);
         }
